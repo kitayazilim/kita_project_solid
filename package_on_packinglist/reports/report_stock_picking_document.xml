@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_saleorder_document" inherit_id="stock_foreign_trade.report_stock_picking_document">
+    <xpath expr="//table[hasclass('table-condensed')]//thead" position="before">
+        <t t-set="has_packing" t-value="any(i and i.product_packaging_id for i in o.move_ids)"/>
+    </xpath>
+    <xpath expr="//table[hasclass('table-condensed')]//thead//tr//th[2]" position="after">
+        <th t-if="has_packing" class="text-left">Paket</th>
+    </xpath>
+    <xpath expr="//table[hasclass('table-condensed')]//tbody//tr//td[2]" position="after">
+        <td t-if="has_packing"><span t-field="l.product_packaging_id.name"/></td>
+    </xpath>
+</template>
+</odoo>
