@@ -15,6 +15,7 @@
         'views/sale_order.xml',
         'views/stock_picking.xml',
         'reports/report_sale_order_document.xml',
+        'reports/report_stock_picking_document.xml',
     ],
     'demo': [
     ],
