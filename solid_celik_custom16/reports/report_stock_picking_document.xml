@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_saleorder_document" inherit_id="stock_foreign_trade.report_stock_picking_document">
+    <xpath expr="//table[hasclass('table-condensed')]//thead//tr" position="inside">
+        <th class="text-left">Net Ağırlık</th>
+        <th class="text-left">Brüt Ağırlık</th>
+    </xpath>
+    <xpath expr="//table[hasclass('table-condensed')]//tbody//tr" position="inside">
+        <td><span t-field="l.net_weight"/></td>
+        <td><span t-field="l.total_weight"/></td>        
+    </xpath>
+</template>
+</odoo>
