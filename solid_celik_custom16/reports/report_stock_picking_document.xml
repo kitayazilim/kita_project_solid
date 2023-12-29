@@ -6,8 +6,8 @@
         <th class="text-left">Brüt Ağırlık</th>
     </xpath>
     <xpath expr="//table[hasclass('table-condensed')]//tbody//tr" position="inside">
-        <td><span t-field="l.net_weight"/></td>
-        <td><span t-field="l.total_weight"/></td>        
+        <td><span t-field="l.gross_weight"/></td>
+        <td><span t-field="l.net_weight"/></td>        
     </xpath>
 </template>
 </odoo>

@@ -2,13 +2,13 @@
 <odoo>
 <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
     <xpath expr="//table[hasclass('o_main_table')]//thead" position="before">
-        <t t-set="has_brand" t-value="any(l.product_id and l.product_id.sudo().product_brand_id for l in lines_to_report)"/>
+        <t t-set="has_brand" t-value="any(l.product_id and l.product_id.sudo().brand_id for l in lines_to_report)"/>
     </xpath>
     <xpath expr="//th[@name='th_description']" position="before">
         <th name="th_brand" t-if="has_brand" class="text-start">Marka</th>
     </xpath>
     <xpath expr="//td[@name='td_name']" position="before">
-        <td name="td_brand" t-if="has_brand"><span t-field="line.product_id.product_brand_id.name"/></td>
+        <td name="td_brand" t-if="has_brand"><span t-field="line.product_id.brand_id.name"/></td>
     </xpath>
 </template>
 </odoo>
