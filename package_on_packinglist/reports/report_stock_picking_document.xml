@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<template id="report_saleorder_document" inherit_id="stock_foreign_trade.report_stock_picking_document">
+<template id="report_stock_picking_document" inherit_id="stock_foreign_trade.report_stock_picking_document">
     <xpath expr="//table[hasclass('table-condensed')]//thead" position="before">
         <t t-set="has_packing" t-value="any(i and i.product_packaging_id for i in o.move_ids)"/>
     </xpath>
