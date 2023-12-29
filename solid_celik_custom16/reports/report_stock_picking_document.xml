@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<template id="report_saleorder_document" inherit_id="stock_foreign_trade.report_stock_picking_document">
+<template id="report_stock_picking_document" inherit_id="stock_foreign_trade.report_stock_picking_document">
     <xpath expr="//table[hasclass('table-condensed')]//thead//tr" position="inside">
         <th class="text-left">Net Ağırlık</th>
         <th class="text-left">Brüt Ağırlık</th>
