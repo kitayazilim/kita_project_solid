@@ -10,19 +10,18 @@
                 <th name="th_extra" class="text-start"><span t-field="attribute.name"/></th>
             </t>
         </xpath>
-        <xpath expr="//th[@name='th_quantity']" position="after">
+        <!-- <xpath expr="//th[@name='th_quantity']" position="after">
             <th name="th_uom" class="text-start">Birim</th>
-        </xpath>
+        </xpath> -->
         <xpath expr="//td[@name='td_name']" position="after">
             <t  t-if="need_extra" t-foreach="line.product_id.product_template_attribute_value_ids.filtered(lambda p: p.attribute_id.show_on_report)" t-as="extra">
                 <td name="th_extra"><span t-field="extra.name"/></td>
             </t>
         </xpath>
-        <xpath expr="//td[@name='td_quantity']" position="after">
+        <!-- <xpath expr="//td[@name='td_quantity']" position="after">
             <th name="td_uom" class="text-start"><span t-field="line.product_uom.name"/></th>
-        </xpath>
+        </xpath> -->
         <xpath expr="//th[@name='th_taxes']" position="replace"/>
         <xpath expr="//td[@name='td_taxes']" position="replace"/>
-        <xpath expr="//t[@t-call='account.document_tax_totals']" position="replace"/>
     </template>
 </odoo>
