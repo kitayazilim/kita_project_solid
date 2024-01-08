@@ -12,6 +12,7 @@
     </xpath>
 
     <xpath expr="//table[hasclass('table-condensed')]//thead" position="before">
+        <t t-set="sale_order" t-value="o.env['sale.order'].search([('name', '=', o.origin)])"/>
         <t t-set="need_extra" t-value="sale_order.order_type=='steel' and any(l.product_id and l.product_id.sudo().product_template_attribute_value_ids.filtered(lambda p: p.attribute_id.show_on_report) for l in o.move_ids)"/>
     </xpath>
     <xpath expr="//table[hasclass('table-condensed')]//thead//tr//th[3]" position="after">            
@@ -25,8 +26,7 @@
         </t>
     </xpath>
 
-    <xpath expr="//table[hasclass('table-condensed')]//thead" position="before">
-        <t t-set="sale_order" t-value="o.env['sale.order'].search([('name', '=', o.origin)])"/>
+    <xpath expr="//table[hasclass('table-condensed')]//thead" position="before">        
         <t t-set="has_brand" t-value="(sale_order and sale_order.order_type == 'ceramic') and any(i and i.product_id.brand_id for i in o.move_ids)"/>
     </xpath>
     <xpath expr="//table[hasclass('table-condensed')]//thead//tr//th[1]" position="after">
