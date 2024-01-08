@@ -4,23 +4,19 @@
     <xpath expr="//table[hasclass('table-condensed')]//thead//tr//th[4]" position="replace"/>
     <xpath expr="//table[hasclass('table-condensed')]//tbody//tr//td[4]" position="replace"/>
 
-    <xpath expr="//table[hasclass('table-condensed')]//thead//tr//th[3]" position="after">
-        <th name="th_uom" class="text-start">Birim</th>
-    </xpath>
-    <xpath expr="//table[hasclass('table-condensed')]//tbody//tr//td[3]" position="after">
-        <th name="td_uom" class="text-start"><span t-field="l.product_uom.name"/></th>
-    </xpath>
-
     <xpath expr="//table[hasclass('table-condensed')]//thead" position="before">
         <t t-set="sale_order" t-value="o.env['sale.order'].search([('name', '=', o.origin)])"/>
         <t t-set="need_extra" t-value="sale_order.order_type=='steel' and any(l.product_id and l.product_id.sudo().product_template_attribute_value_ids.filtered(lambda p: p.attribute_id.show_on_report) for l in o.move_ids)"/>
     </xpath>
-    <xpath expr="//table[hasclass('table-condensed')]//thead//tr//th[3]" position="after">            
+
+    <xpath expr="//table[hasclass('table-condensed')]//thead//tr//th[3]" position="after">
+        <th name="th_uom" class="text-start">Birim</th>
         <t t-if="need_extra" t-foreach="o.move_ids.product_id.product_template_attribute_value_ids.filtered(lambda p: p.attribute_id.show_on_report).mapped('attribute_id')" t-as="attribute">
             <th name="th_extra" class="text-start"><span t-field="attribute.name"/></th>
         </t>
     </xpath>
     <xpath expr="//table[hasclass('table-condensed')]//tbody//tr//td[3]" position="after">
+        <th name="td_uom" class="text-start"><span t-field="l.product_uom.name"/></th>
         <t t-if="need_extra" t-foreach="l.product_id.product_template_attribute_value_ids.filtered(lambda p: p.attribute_id.show_on_report)" t-as="extra">
             <td name="th_extra"><span t-field="extra.name"/></td>
         </t>

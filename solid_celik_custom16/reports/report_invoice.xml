@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_invoice_document" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[@name='address_not_same_as_shipping']//span[@t-field='o.partner_id.vat']" position="replace">
+            <t t-if="o.partner_id.default_einvoice_profile == 'IHRACAT'">
+                <span t-field="o.partner_id.company_registry"/>
+            </t>
+            <t t-else="">
+                <span t-field="o.partner_id.vat"/>
+            </t>
+        </xpath>
+
+        <xpath expr="//div[@name='address_same_as_shipping']//span[@t-field='o.partner_id.vat']" position="replace">
+            <t t-if="o.partner_id.default_einvoice_profile == 'IHRACAT'">
+                <span t-field="o.partner_id.company_registry"/>
+            </t>
+            <t t-else="">
+                <span t-field="o.partner_id.vat"/>
+            </t>
+        </xpath>
+
+        <xpath expr="//div[@id='partner_vat_no_shipping']//span[@t-field='o.partner_id.vat']" position="replace">
+            <t t-if="o.partner_id.default_einvoice_profile == 'IHRACAT'">
+                <span t-field="o.partner_id.company_registry"/>
+            </t>
+            <t t-else="">
+                <span t-field="o.partner_id.vat"/>
+            </t>
+        </xpath>
+
+        <xpath expr="//table[@name='invoice_line_table']//tbody//span[@t-field='line.price_unit']" position="replace">
+            <span class="text-nowrap" t-field="line.price_unit" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+        </xpath>
+
+        <xpath expr="//table[@name='invoice_line_table']//thead" position="before">
+            <t t-set="sale_order" t-value="o.env['sale.order'].search([('name', '=', o.invoice_origin)])"/>
+            <t t-set="need_extra" t-value="sale_order.order_type=='steel' and any(l.product_id and l.product_id.sudo().product_template_attribute_value_ids.filtered(lambda p: p.attribute_id.show_on_report) for l in o.invoice_line_ids)"/>
+        </xpath>
+
+        <xpath expr="//table[@name='invoice_line_table']//th[@name='th_description']" position="after">
+            <t t-set="total_extras" t-value="o.invoice_line_ids.product_id.product_template_attribute_value_ids.filtered(lambda p: p.attribute_id.show_on_report).mapped('attribute_id')"/>
+            <t t-if="need_extra" t-foreach="total_extras" t-as="attribute">
+                <th name="th_extra" class="text-start"><span t-field="attribute.name"/></th>
+            </t>
+        </xpath>
+        <xpath expr="//table[@name='invoice_line_table']//td[@name='account_invoice_line_name']" position="after">
+            <t t-set="line_has_extra" t-value="line.product_id.product_template_attribute_value_ids.filtered(lambda p: p.attribute_id.show_on_report)"/>
+            <t t-if="line_has_extra" t-foreach="line_has_extra" t-as="extra">
+                <td name="th_extra"><span t-esc="extra.name"/></td>
+            </t>
+            <t t-if="not line_has_extra" t-foreach="total_extras" t-as="extra">
+                <td name="th_extra"></td>
+            </t>
+        </xpath>
+    </template>
+</odoo>
