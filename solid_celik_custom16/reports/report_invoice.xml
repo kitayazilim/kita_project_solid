@@ -34,7 +34,7 @@
 
         <xpath expr="//table[@name='invoice_line_table']//thead" position="before">
             <t t-set="sale_order" t-value="o.env['sale.order'].search([('name', '=', o.invoice_origin)])"/>
-            <t t-set="need_extra" t-value="sale_order.order_type=='steel' and any(l.product_id and l.product_id.sudo().product_template_attribute_value_ids.filtered(lambda p: p.attribute_id.show_on_report) for l in o.invoice_line_ids)"/>
+            <t t-set="need_extra" t-value="sale_order.order_type == 'steel' and any(l.product_id and l.product_id.sudo().product_template_attribute_value_ids.filtered(lambda p: p.attribute_id.show_on_report) for l in o.invoice_line_ids)"/>
         </xpath>
 
         <xpath expr="//table[@name='invoice_line_table']//th[@name='th_description']" position="after">
@@ -43,6 +43,7 @@
                 <th name="th_extra" class="text-end"><span t-field="attribute.name"/></th>
             </t>
         </xpath>
+
         <xpath expr="//table[@name='invoice_line_table']//td[@name='account_invoice_line_name']" position="after">
             <t t-set="line_has_extra" t-value="need_extra and line.product_id.product_template_attribute_value_ids.filtered(lambda p: p.attribute_id.show_on_report)"/>
             <t t-if="line_has_extra" t-foreach="line_has_extra" t-as="extra">
@@ -50,6 +51,29 @@
             </t>
             <t t-if="need_extra and not line_has_extra" t-foreach="total_extras" t-as="extra">
                 <td name="th_extra"></td>
+            </t>
+        </xpath>
+
+        <xpath expr="//table[@name='invoice_line_table']//th[@name='th_priceunit']" position="before">
+            <t t-set="sale_order_type" t-value="sale_order and sale_order.order_type"/>
+            <t t-if="sale_order_type == 'steel'">
+                <th name="th_weight" class="text-end">Net Weight</th>
+            </t>
+            <t t-if="sale_order_type == 'ceramic'">
+                <th name="th_weight" class="text-end">Total Box/Pallet</th>
+            </t>
+        </xpath>
+
+        <xpath expr="//table[@name='invoice_line_table']//td[@name='account_invoice_line_name']" position="after">
+            <t t-if="sale_order_type == 'steel'">
+                <t t-if="sale_order_type == 'steel' and sale_order.picking_ids" t-set="weight" t-value="sale_order.picking_ids[0].move_ids_without_package.filtered(lambda l: l.product_id == line.product_id.id)[0].net_weight"/>
+                <t t-else="" t-set="weight" t-value="''"/>
+                <td name="th_pallet" class="text-end"><span t-esc="weight"/></td>
+            </t>
+            <t t-if="sale_order_type == 'ceramic'">
+                <t t-if="sale_order_type == 'ceramic' and sale_order.picking_ids" t-set="pallet" t-value="sale_order.picking_ids[0].move_ids_without_package.filtered(lambda l: l.product_id == line.product_id.id)[0].product_packaging_id.name"/>
+                <t t-else="" t-set="pallet" t-value="''"/>
+                <th name="th_pallet" class="text-end"><span t-esc="pallet"/></th>
             </t>
         </xpath>
     </template>
