@@ -44,7 +44,7 @@
             </t>
         </xpath>
         <xpath expr="//table[@name='invoice_line_table']//td[@name='account_invoice_line_name']" position="after">
-            <t t-set="line_has_extra" t-value="line.product_id.product_template_attribute_value_ids.filtered(lambda p: p.attribute_id.show_on_report)"/>
+            <t t-set="line_has_extra" t-value="need_extra and line.product_id.product_template_attribute_value_ids.filtered(lambda p: p.attribute_id.show_on_report)"/>
             <t t-if="line_has_extra" t-foreach="line_has_extra" t-as="extra">
                 <td name="th_extra"><span t-esc="extra.name"/></td>
             </t>
