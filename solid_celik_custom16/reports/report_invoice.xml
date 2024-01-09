@@ -48,7 +48,7 @@
             <t t-if="line_has_extra" t-foreach="line_has_extra" t-as="extra">
                 <td name="th_extra"><span t-esc="extra.name"/></td>
             </t>
-            <t t-if="not line_has_extra" t-foreach="total_extras" t-as="extra">
+            <t t-if="need_extra and not line_has_extra" t-foreach="total_extras" t-as="extra">
                 <td name="th_extra"></td>
             </t>
         </xpath>
