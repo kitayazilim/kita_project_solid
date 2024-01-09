@@ -14,6 +14,7 @@
         'views/product_attribute.xml',
         'views/sale_order.xml',
         'views/stock_picking.xml',
+        'views/res_partner.xml',
         'reports/report_sale_order_document.xml',
         'reports/report_stock_picking_document.xml',
         'reports/report_invoice.xml',
