@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//td[@name='td_priceunit']//span[@t-field='line.price_unit']" position="replace">
+            <span t-field="line.price_unit" t-options='{"widget": "monetary", "display_currency": line.currency_id}'/>
+        </xpath>
+        
         <xpath expr="//table[hasclass('o_main_table')]//thead" position="before">
             <t t-set="curr_order" t-value="lines_to_report[0].order_id"/>
             <t t-set="need_extra" t-value="curr_order.order_type=='steel' and any(l.product_id and l.product_id.sudo().product_template_attribute_value_ids.filtered(lambda p: p.attribute_id.show_on_report) for l in lines_to_report)"/>
         </xpath>
         <xpath expr="//th[@name='th_description']" position="after">            
             <t  t-if="need_extra" t-foreach="curr_order.order_line.product_id.product_template_attribute_value_ids.filtered(lambda p: p.attribute_id.show_on_report).mapped('attribute_id')" t-as="attribute">
-                <th name="th_extra" class="text-start"><span t-field="attribute.name"/></th>
+                <th name="th_extra" class="text-end"><span t-field="attribute.name"/></th>
             </t>
         </xpath>
         <!-- <xpath expr="//th[@name='th_quantity']" position="after">
@@ -15,7 +19,7 @@
         </xpath> -->
         <xpath expr="//td[@name='td_name']" position="after">
             <t  t-if="need_extra" t-foreach="line.product_id.product_template_attribute_value_ids.filtered(lambda p: p.attribute_id.show_on_report)" t-as="extra">
-                <td name="th_extra"><span t-field="extra.name"/></td>
+                <td name="th_extra" class="text-end"><span t-field="extra.name"/></td>
             </t>
         </xpath>
         <!-- <xpath expr="//td[@name='td_quantity']" position="after">

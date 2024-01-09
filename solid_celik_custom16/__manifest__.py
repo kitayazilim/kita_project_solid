@@ -9,7 +9,7 @@
     'license': 'LGPL-3',
     'author': 'Kıta Yazılım',
     'website': 'kitayazilim.com.tr',
-    'depends': ['sale', 'stock', 'stock_foreign_trade'],
+    'depends': ['sale', 'stock', 'delivery', 'stock_picking', 'stock_foreign_trade'],
     'data': [
         'views/product_attribute.xml',
         'views/sale_order.xml',
