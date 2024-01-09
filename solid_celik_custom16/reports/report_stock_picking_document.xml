@@ -37,8 +37,8 @@
         <th class="text-end">Brüt Ağırlık</th>
     </xpath>
     <xpath expr="//table[hasclass('table-condensed')]//tbody//tr" position="inside">
+        <td class="text-end"><span t-field="l.net_weight"/></td>
         <td class="text-end"><span t-field="l.gross_weight"/></td>
-        <td class="text-end"><span t-field="l.net_weight"/></td>        
     </xpath>
 
     <xpath expr="//table[2]//tr[2]" position="after">
