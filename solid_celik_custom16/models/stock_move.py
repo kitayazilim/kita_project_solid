@@ -9,8 +9,8 @@ class StockMove(models.Model):
 
     _inherit = "stock.move"
 
-    gross_weight = fields.Float("Toplam Ağırlık")
-    net_weight = fields.Float("Net Ağırlık")
+    gross_weight = fields.Float("Gross Weight")
+    net_weight = fields.Float("Net Weight")
 
     @api.constrains('gross_weight')
     def _check_gross_weight(self):
