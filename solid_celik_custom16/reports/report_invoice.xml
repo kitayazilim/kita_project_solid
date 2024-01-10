@@ -54,7 +54,7 @@
             </t>
         </xpath>
 
-        <xpath expr="//table[@name='invoice_line_table']//th[@name='th_description']" position="before">
+        <xpath expr="//table[@name='invoice_line_table']//th[@name='th_description']" position="after">
             <t t-set="sale_order_type" t-value="sale_order and sale_order.order_type"/>
             <t t-if="sale_order_type == 'steel'">
                 <th name="th_weight" class="text-end">Net Weight</th>
