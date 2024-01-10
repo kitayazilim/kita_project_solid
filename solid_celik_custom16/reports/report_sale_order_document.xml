@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//p[@t-if='doc.partner_id.vat']//span[@t-field='doc.partner_id.vat']" position="replace">
+            <t t-if="doc.partner_id.default_einvoice_profile == 'IHRACAT'">
+                <span t-field="doc.partner_id.company_registry"/>
+            </t>
+            <t t-else="">
+                <span t-field="doc.partner_id.vat"/>
+            </t>
+        </xpath>
+
         <xpath expr="//td[@name='td_priceunit']//span[@t-field='line.price_unit']" position="replace">
             <span t-field="line.price_unit" t-options='{"widget": "monetary", "display_currency": line.currency_id}'/>
         </xpath>
