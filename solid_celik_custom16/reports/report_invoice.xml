@@ -60,7 +60,7 @@
                 <th name="th_weight" class="text-end">Net Weight</th>
             </t>
             <t t-if="sale_order_type == 'ceramic'">
-                <th name="th_weight" class="text-end">Total Box/Pallet</th>
+                <th name="th_pallet" class="text-end">Total Box/Pallet</th>
             </t>
         </xpath>
 
@@ -68,7 +68,7 @@
             <t t-if="sale_order_type == 'steel'">
                 <t t-if="sale_order_type == 'steel' and sale_order.picking_ids" t-set="weight" t-value="sale_order.picking_ids[0].move_ids_without_package.filtered(lambda l: l.product_id == line.product_id)[0].net_weight"/>
                 <t t-else="" t-set="weight" t-value="''"/>
-                <td name="th_pallet" class="text-end"><span t-esc="weight"/></td>
+                <td name="th_weight" class="text-end"><span t-esc="weight"/></td>
             </t>
             <t t-if="sale_order_type == 'ceramic'">
                 <t t-if="sale_order_type == 'ceramic' and sale_order.picking_ids" t-set="pallet" t-value="sale_order.picking_ids[0].move_ids_without_package.filtered(lambda l: l.product_id == line.product_id)[0].product_packaging_id.name"/>
