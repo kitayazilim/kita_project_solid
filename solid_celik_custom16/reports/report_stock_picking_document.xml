@@ -10,13 +10,13 @@
     </xpath>
 
     <xpath expr="//table[hasclass('table-condensed')]//thead//tr//th[3]" position="after">
-        <th name="th_uom" class="text-start">Unit</th>
+        <th name="th_uom" class="text-center">Unit</th>
         <t t-if="need_extra" t-foreach="o.move_ids.product_id.product_template_attribute_value_ids.filtered(lambda p: p.attribute_id.show_on_report).mapped('attribute_id')" t-as="attribute">
-            <th name="th_extra" class="text-end"><span t-field="attribute.name"/></th>
+            <th name="th_extra" class="text-center"><span t-field="attribute.name"/></th>
         </t>
     </xpath>
     <xpath expr="//table[hasclass('table-condensed')]//tbody//tr//td[3]" position="after">
-        <th name="td_uom" class="text-start"><span t-field="l.product_uom.name"/></th>
+        <td name="td_uom" class="text-start"><span t-field="l.product_uom.name"/></td>
         <t t-if="need_extra" t-foreach="l.product_id.product_template_attribute_value_ids.filtered(lambda p: p.attribute_id.show_on_report)" t-as="extra">
             <td name="th_extra" class="text-end"><span t-field="extra.name"/></td>
         </t>
@@ -26,15 +26,15 @@
         <t t-set="has_brand" t-value="(sale_order and sale_order.order_type == 'ceramic') and any(i and i.product_id.brand_id for i in o.move_ids)"/>
     </xpath>
     <xpath expr="//table[hasclass('table-condensed')]//thead//tr//th[1]" position="after">
-        <th t-if="has_brand" class="text-start">Brand</th>
+        <th t-if="has_brand" class="text-center">Brand</th>
     </xpath>
     <xpath expr="//table[hasclass('table-condensed')]//tbody//tr//td[1]" position="after">
         <td t-if="has_brand"><span t-field="l.product_id.brand_id.name"/></td>
     </xpath>   
 
     <xpath expr="//table[hasclass('table-condensed')]//thead//tr" position="inside">
-        <th class="text-end">Net Weight</th>
-        <th class="text-end">Gross Weight</th>
+        <th class="text-center">Net Weight</th>
+        <th class="text-center">Gross Weight</th>
     </xpath>
     <xpath expr="//table[hasclass('table-condensed')]//tbody//tr" position="inside">
         <td class="text-end"><span t-field="l.net_weight"/></td>

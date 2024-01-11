@@ -20,7 +20,7 @@
         </xpath>
         <xpath expr="//th[@name='th_description']" position="after">            
             <t  t-if="need_extra" t-foreach="curr_order.order_line.product_id.product_template_attribute_value_ids.filtered(lambda p: p.attribute_id.show_on_report).mapped('attribute_id')" t-as="attribute">
-                <th name="th_extra" class="text-end"><span t-field="attribute.name"/></th>
+                <th name="th_extra" class="text-center"><span t-field="attribute.name"/></th>
             </t>
         </xpath>
         <!-- <xpath expr="//th[@name='th_quantity']" position="after">

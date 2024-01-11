@@ -5,7 +5,7 @@
         <t t-set="has_brand" t-value="any(l.product_id and l.product_id.sudo().brand_id for l in lines_to_report)"/>
     </xpath>
     <xpath expr="//th[@name='th_description']" position="before">
-        <th name="th_brand" t-if="has_brand" class="text-start">Marka</th>
+        <th name="th_brand" t-if="has_brand" class="text-center">Marka</th>
     </xpath>
     <xpath expr="//td[@name='td_name']" position="before">
         <td name="td_brand" t-if="has_brand"><span t-field="line.product_id.brand_id.name"/></td>

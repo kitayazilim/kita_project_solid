@@ -40,7 +40,7 @@
         <xpath expr="//table[@name='invoice_line_table']//th[@name='th_description']" position="after">
             <t t-set="total_extras" t-value="o.invoice_line_ids.product_id.product_template_attribute_value_ids.filtered(lambda p: p.attribute_id.show_on_report).mapped('attribute_id')"/>
             <t t-if="need_extra" t-foreach="total_extras" t-as="attribute">
-                <th name="th_extra" class="text-end"><span t-field="attribute.name"/></th>
+                <th name="th_extra" class="text-center"><span t-field="attribute.name"/></th>
             </t>
         </xpath>
 
@@ -57,10 +57,10 @@
         <xpath expr="//table[@name='invoice_line_table']//th[@name='th_description']" position="after">
             <t t-set="sale_order_type" t-value="sale_order and sale_order.order_type"/>
             <t t-if="sale_order_type == 'steel'">
-                <th name="th_weight" class="text-end">Net Weight</th>
+                <th name="th_weight" class="text-center">Net Weight</th>
             </t>
             <t t-if="sale_order_type == 'ceramic'">
-                <th name="th_pallet" class="text-end">Total Box/Pallet</th>
+                <th name="th_pallet" class="text-center">Total Box/Pallet</th>
             </t>
         </xpath>
 
@@ -73,7 +73,7 @@
             <t t-if="sale_order_type == 'ceramic'">
                 <t t-if="sale_order_type == 'ceramic' and sale_order.picking_ids" t-set="pallet" t-value="sale_order.picking_ids[0].move_ids_without_package.filtered(lambda l: l.product_id == line.product_id)[0].product_packaging_id.name"/>
                 <t t-else="" t-set="pallet" t-value="''"/>
-                <th name="th_pallet" class="text-end"><span t-esc="pallet"/></th>
+                <td name="th_pallet" class="text-end"><span t-esc="pallet"/></td>
             </t>
         </xpath>
     </template>

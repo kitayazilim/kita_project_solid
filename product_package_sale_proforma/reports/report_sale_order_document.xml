@@ -5,7 +5,7 @@
         <t t-set="has_package" t-value="any(l and l.sudo().product_packaging_id for l in lines_to_report)"/>
     </xpath>
     <xpath expr="//th[@name='th_priceunit']" position="after">
-        <th name="th_package" t-if="has_package" class="text-start">Paket</th>
+        <th name="th_package" t-if="has_package" class="text-center">Paket</th>
     </xpath>
     <xpath expr="//td[@name='td_priceunit']" position="after">
         <td name="td_package" t-if="has_package"><span t-field="line.product_packaging_id.name"/></td>
