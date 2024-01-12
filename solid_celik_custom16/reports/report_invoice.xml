@@ -73,7 +73,7 @@
             <t t-if="sale_order_type == 'ceramic'">
                 <t t-if="sale_order_type == 'ceramic' and sale_order.picking_ids" t-set="pallet" t-value="sale_order.picking_ids[0].move_ids_without_package.filtered(lambda l: l.product_id == line.product_id)[0].product_packaging_id.name"/>
                 <t t-else="" t-set="pallet" t-value="''"/>
-                <td name="th_pallet" class="text-end"><span t-esc="pallet"/></td>
+                <td name="th_pallet" class="text-center"><span t-esc="pallet"/></td>
             </t>
         </xpath>
     </template>

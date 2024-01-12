@@ -16,7 +16,7 @@
         </t>
     </xpath>
     <xpath expr="//table[hasclass('table-condensed')]//tbody//tr//td[3]" position="after">
-        <td name="td_uom" class="text-start"><span t-field="l.product_uom.name"/></td>
+        <td name="td_uom" class="text-center"><span t-field="l.product_uom.name"/></td>
         <t t-if="need_extra" t-foreach="l.product_id.product_template_attribute_value_ids.filtered(lambda p: p.attribute_id.show_on_report)" t-as="extra">
             <td name="th_extra" class="text-end"><span t-field="extra.name"/></td>
         </t>

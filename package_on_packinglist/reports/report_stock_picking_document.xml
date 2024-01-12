@@ -8,7 +8,7 @@
         <th t-if="has_packing" class="text-center">Kap/Palet</th>
     </xpath>
     <xpath expr="//table[hasclass('table-condensed')]//tbody//tr//td[2]" position="after">
-        <td t-if="has_packing" class="text-end"><span t-field="l.product_packaging_id.name"/></td>
+        <td t-if="has_packing" class="text-center"><span t-field="l.product_packaging_id.name"/></td>
     </xpath>
 </template>
 </odoo>

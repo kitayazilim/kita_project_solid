@@ -8,7 +8,7 @@
         <th name="th_package" t-if="has_package" class="text-center">Paket</th>
     </xpath>
     <xpath expr="//td[@name='td_priceunit']" position="after">
-        <td name="td_package" t-if="has_package"><span t-field="line.product_packaging_id.name"/></td>
+        <td name="td_package" t-if="has_package" class="text-center"><span t-field="line.product_packaging_id.name"/></td>
     </xpath>
 </template>
 </odoo>
