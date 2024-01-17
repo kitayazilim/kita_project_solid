@@ -1,0 +1,163 @@
+<t t-name="stock_foreign_trade.report_stock_picking_document">
+    <t t-call="web.external_layout">
+        <div class="page">
+            <p class="text-end py-2" t-field="o.scheduled_date" t-options="{'widget': 'date', 'format': 'dd-MM-yyyy'}"/>
+            <div class="row">
+                <h3 class="text-left" style="margin:10px 0px 40px 11px;border-bottom: 1px solid gray">Packing
+                    List
+                </h3>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <div>
+                        <strong>Billing Address:</strong>
+                    </div>
+                    <div>
+                        <span t-if="o.sale_id.partner_invoice_id.is_company">
+                            <span t-field="o.sale_id.partner_invoice_id"/>
+                        </span>
+                        <span t-if="o.sale_id.partner_invoice_id.parent_id">
+                            <span t-field="o.sale_id.partner_invoice_id.parent_id"/>
+                        </span>
+                    </div>
+                    <div>
+                        <span t-field="o.sale_id.partner_invoice_id.street"/>
+                        <span t-field="o.sale_id.partner_invoice_id.street2"/>
+                        <span t-field="o.sale_id.partner_invoice_id.zip"/>
+                        <span t-field="o.sale_id.partner_invoice_id.city"/>
+                        <span t-field="o.sale_id.partner_invoice_id.state_id"/>/
+                        <span t-field="o.sale_id.partner_invoice_id.country_id"/>
+                    </div>
+                    <div>
+                        <span>Tel :</span>
+                        <span t-if="o.sale_id.partner_invoice_id.is_company">
+                            <span t-field="o.sale_id.partner_invoice_id.phone"/>
+                        </span>
+                        <span t-if="o.sale_id.partner_invoice_id.parent_id">
+                            <span t-field="o.sale_id.partner_invoice_id.parent_id.phone"/>
+                        </span>
+                    </div>
+                    <div>
+                        <span t-if="o.sale_id.partner_invoice_id.is_company">
+                            <span t-field="o.sale_id.partner_invoice_id.email"/>
+                        </span>
+                        <span t-if="o.sale_id.partner_invoice_id.parent_id">
+                            <span t-field="o.sale_id.partner_invoice_id.parent_id.email"/>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div>
+                        <strong>Shipping Address:</strong>
+                    </div>
+                    <div>
+                        <span t-if="o.partner_id.is_company">
+                            <span t-field="o.partner_id"/>
+                        </span>
+                        <span t-if="o.partner_id.parent_id">
+                            <span t-field="o.partner_id.parent_id"/>
+                        </span>
+                    </div>
+                    <div>
+                        <span t-field="o.partner_id.street"/>
+                        <span t-field="o.partner_id.street2"/>
+                        <span t-field="o.partner_id.zip"/>
+                        <span t-field="o.partner_id.city"/>
+                        <span t-field="o.partner_id.state_id"/>/
+                        <span t-field="o.partner_id.country_id"/>
+                    </div>
+
+                    <div>
+                        <span>Tel :</span>
+                        <span t-if="o.partner_id.is_company">
+                            <span t-field="o.partner_id.phone"/>
+                        </span>
+                        <span t-if="o.partner_id.parent_id">
+                            <span t-field="o.partner_id.parent_id.phone"/>
+                        </span>
+                    </div>
+                    <div>
+                        <span t-if="o.partner_id.is_company">
+                            <span t-field="o.partner_id.email"/>
+                        </span>
+                        <span t-if="o.partner_id.parent_id">
+                            <span t-field="o.partner_id.parent_id.email"/>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th class="text-left">
+                            <strong>Item</strong>
+                        </th>
+                        <th class="text-left">
+                            <strong>Material Description</strong>
+                        </th>
+                        <th class="text-right">
+                            <strong>Quantity</strong>
+                        </th>
+                        <th class="text-right">
+                            <strong>Country of Origin</strong>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-set="item" t-value="0"/>
+                    <tr t-foreach="o.move_ids" t-as="l">
+                        <t t-set="item" t-value="item + 1"/>
+                        <td>
+                            <span t-esc="item"/>
+                        </td>
+                        <td>
+                            <span t-field="l.product_id.display_name"/>
+                        </td>
+                        <td class="text-end">
+                            <span t-esc="'{0:,.0f}'.format(l.product_uom_qty)"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="l.product_id.product_tmpl_id.country_of_origin"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br/>
+            <table>
+                <tr>
+                    <td style="padding: 3px 3px 3px 3px;">Net Weight</td>
+                    <td style="padding: 3px 3px 3px 40px;">
+                        <span t-esc="'{0:,.2f}'.format(o.weight)"/>
+                        <span t-field="o.weight_uom_name"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 3px 3px 3px 3px;">Gross Weight</td>
+                    <td style="padding: 3px 3px 3px 40px;">
+                        <span t-esc="'{0:,.2f}'.format(o.weight_gross)"/>
+                        <span t-field="o.weight_uom_name"/>
+                    </td>
+                </tr>
+                <tr>
+                </tr>
+                <tr>
+                    <td style="padding: 3px 3px 3px 3px;">Terms of Delivery</td>
+                    <td style="padding: 3px 3px 3px 40px;">
+                        <span t-field="o.sale_id.incoterm"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 3px 3px 3px 3px;">Order No</td>
+                    <td style="padding: 3px 3px 3px 40px;">
+                        <span t-field="o.sale_id.client_order_ref"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </t>
+</t>
