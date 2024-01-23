@@ -17,5 +17,5 @@ msgstr ""
 
 #. module: package_on_packinglist
 #: model_terms:ir.ui.view,arch_db:package_on_packinglist.report_stock_picking_document
-msgid "Kap/Palet"
-msgstr "Box/Pallet"
+msgid "Box/Pallet"
+msgstr "Kap/Palet"
