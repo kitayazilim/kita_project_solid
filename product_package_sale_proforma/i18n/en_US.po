@@ -18,4 +18,4 @@ msgstr ""
 #. module: product_package_sale_proforma
 #: model_terms:ir.ui.view,arch_db:product_package_sale_proforma.report_saleorder_document
 msgid "Paket"
-msgstr "Number Pall"
+msgstr "# Pall"
